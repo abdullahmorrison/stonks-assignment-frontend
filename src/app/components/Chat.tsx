@@ -8,7 +8,7 @@ export default function Chat(){
   const [messageInputText, setMessageInputText] = useState("")
 
   const [suggestions, setSuggestions] = useState<string[] | undefined>()
-  const [suggestUsers]  = useSuggestions(messages.map((message)=>message.username))
+  const [suggestUsers]  = useSuggestions(messages.filter(message=>message.type=="user").map((message)=>message.username))
   const [suggestCommands] = useSuggestions(["block [username]", "unblock [username]"])
 
   const getLastWord = useCallback((text: string) =>{
@@ -52,7 +52,13 @@ export default function Chat(){
           {messages.map((message, index)=>{
             return(
               <p key={index}className='py-1 text-[14px] hover:bg-gray-800'>
-                <span className='text-yellow-500 font-bold'>{message.username}</span>: {message.message}
+                {message.type == "user" ?
+                  <>
+                  <span className='text-yellow-500 font-bold'>{message.username}</span> {message.message})
+                  </>
+                  :
+                  <span className='text-gray-300'>{message.message}</span>
+                }
               </p>
             )
           })}
