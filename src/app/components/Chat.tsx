@@ -54,7 +54,7 @@ export default function Chat(){
               <p key={index}className='py-1 text-[14px] hover:bg-gray-800'>
                 {message.type == "user" ?
                   <>
-                  <span className='text-yellow-500 font-bold'>{message.username}</span> {message.message})
+                  <span className='text-yellow-500 font-bold'>{message.username}</span> {message.message}
                   </>
                   :
                   <span className='text-gray-300'>{message.message}</span>
