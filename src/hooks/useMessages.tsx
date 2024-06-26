@@ -11,16 +11,6 @@ export default function useMessages() {
   const [messages, setMessages] = useState<Message[]>([])
   const  {blockedUsers, blockUser, unblockUser} = useBlockUser()
 
-  useEffect(()=>{
-    const fetchUsers = async () => {
-      const response = await fetch("https://665621609f970b3b36c4625e.mockapi.io/users")
-      const data =  (await response.json()).map((user: any)=>user.username)
-      setUsers(data)
-      messagesInit(data, messagesJSON)
-    }
-    fetchUsers()
-  },[])
-
   const messagesInit = useCallback((users: string[], messagesList: string[]) => {
     let messages: Message[] = []
 
@@ -32,7 +22,18 @@ export default function useMessages() {
       })
     })
     setMessages(messages)
-  }, [users, messagesJSON])
+  }, [])
+
+  useEffect(()=>{
+    const fetchUsers = async () => {
+      const response = await fetch("https://665621609f970b3b36c4625e.mockapi.io/users")
+      const data =  (await response.json()).map((user: any)=>user.username)
+      setUsers(data)
+      messagesInit(data, messagesJSON)
+    }
+    fetchUsers()
+  },[messagesInit])
+
 
   //Since chat is not moving, messages won't be added so I'll just print blockedUsers when it updates
   useEffect(()=>{
@@ -54,7 +55,7 @@ export default function useMessages() {
 
     const newMessage: Message = {username, message}
     setMessages((curMessages: Message[])=>[...curMessages, newMessage])
-  }, [blockedUsers, messages])
+  }, [blockUser, unblockUser, blockedUsers])
 
   return {messages, addMessage}
 }

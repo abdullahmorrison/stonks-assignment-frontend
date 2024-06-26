@@ -15,7 +15,7 @@ export default function Chat(){
     const trimmedText = text.trim()
     const words = trimmedText.split(/\s+/)
     return words.length > 0 ? words[words.length - 1] : ""
-  }, [suggestions, messages])
+  }, [])
   const evaluateText = useCallback((e:  React.FormEvent<HTMLInputElement>) =>{
     const message = e.currentTarget.value
 
@@ -26,7 +26,7 @@ export default function Chat(){
     }else{
       setSuggestions(undefined)
     }
-  }, [suggestions, messages])
+  }, [suggestions, getLastWord, suggestCommands, suggestUsers])
 
   //Keeping chat scroll to bottom for every new message
   const chatContainerRef = useRef<HTMLDivElement | null>(null)
@@ -44,14 +44,14 @@ export default function Chat(){
       setMessageInputText("")
       setSuggestions(undefined)
     }
-  }, [messageInputText])
+  }, [messageInputText, currentUser, addMessage])
 
   return(
       <section className='flex flex-col justify-end p-2 w-[500px] h-full border border-gray-600 relative'>
         <div ref={chatContainerRef} className='overflow-auto'>
-          {messages.map((message)=>{
+          {messages.map((message, index)=>{
             return(
-              <p className='py-1 text-[14px] hover:bg-gray-800'>
+              <p key={index}className='py-1 text-[14px] hover:bg-gray-800'>
                 <span className='text-yellow-500 font-bold'>{message.username}</span>: {message.message}
               </p>
             )
@@ -63,8 +63,9 @@ export default function Chat(){
             {suggestions.length==0 //check if any matches exits
               ?<p>No matches</p>
               :<>
-                {suggestions.map((suggestion: string)=>
+                {suggestions.map((suggestion: string, index: number)=>
                   <button 
+                    key={index}
                     className='w-full text-left rounded p-1 focus:bg-gray-700 hover:bg-gray-700'
                     onClick={()=>{
                       setMessageInputText((prev)=>prev.substring(0, prev.lastIndexOf(" ")+2)+suggestion+" ")
