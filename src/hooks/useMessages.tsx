@@ -13,7 +13,7 @@ type NotificationMessage = {
 }
 type Message = UserMessage | NotificationMessage
 export default function useMessages() {
-  const [users, setUsers] = useState([])
+  const [_, setUsers] = useState([])
   const [messages, setMessages] = useState<Message[]>([])
   const  {blockedUsers, blockUser, unblockUser} = useBlockUser()
 
