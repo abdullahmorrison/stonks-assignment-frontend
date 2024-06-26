@@ -4,6 +4,8 @@ The website is available here: [https://stonks-assignment-abdullah-morrison.netl
 
 The broadcast is just a Twitch IFrame of a 24/7 livestream to make it look nicer.
 
+Stonks seems to have an orange theme so I made the colors orange instead of Twitch's purple theme.
+
 ### How to run locally
 Clone the repo
 ```
