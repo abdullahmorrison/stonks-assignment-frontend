@@ -9,7 +9,7 @@ export default function Chat(){
 
   const [suggestions, setSuggestions] = useState<string[] | undefined>()
   const [suggestUsers]  = useSuggestions(messages.filter(message=>message.type=="user").map((message)=>message.username))
-  const [suggestCommands] = useSuggestions(["block [username]", "unblock [username]"])
+  const [suggestCommands] = useSuggestions(["block [username]", "unblock [username]", "mods", "vips"])
 
   const getLastWord = useCallback((text: string) =>{
     const trimmedText = text.trim()
