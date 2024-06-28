@@ -1,5 +1,6 @@
 import { useCallback, useMemo } from "react"
 import emotes from "@/assets/emotes.json"
+import Image from "next/image"
 
 type UserMessage = {
   type: "user"
@@ -26,21 +27,21 @@ export default function Message({message}: Message){
 
   const parseMessage = useCallback(()=>{
     return(
-      words.map((word: any)=>{
-        //remove colon for emotes
+      words.map((word: string, index: number)=>{
+        //remove  for emotes
         if(word.charAt(0)==":") word = word.substring(1, word.length)
 
         if(emoteMap[word]){
-          return <img className="w-8 mx-1" src={emoteMap[word]} alt={word}/>
+          return <Image key={index} className="w-8 mx-1" src={emoteMap[word]} alt={word}/>
         }else{
           return <>{word} </>
         }
       })
     )
-  }, [words])
+  }, [words, emoteMap])
 
   return(
-    <p className='flex items-center py-1 text-[14px] hover:bg-gray-800'>
+    <p  className='flex items-center py-1 text-[14px] hover:bg-gray-800'>
       {message.type == "user" ?
         <>
           <span className='text-yellow-500 font-bold'>{message.username}</span>: {parseMessage()}

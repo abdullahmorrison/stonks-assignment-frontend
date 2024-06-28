@@ -31,7 +31,7 @@ export default function Chat(){
     }else{
       setSuggestions(undefined)
     }
-  }, [getLastWord, suggestCommands, suggestUsers])
+  }, [getLastWord, suggestCommands, suggestUsers, suggestEmotes])
 
   //Keeping chat scroll to bottom for every new message
   const chatContainerRef = useRef<HTMLDivElement | null>(null)
