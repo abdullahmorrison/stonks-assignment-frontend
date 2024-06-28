@@ -32,7 +32,7 @@ export default function Message({message}: Message){
         if(word.charAt(0)==":") word = word.substring(1, word.length)
 
         if(emoteMap[word]){
-          return <Image key={index} className="w-8 mx-1" src={emoteMap[word]} alt={word} width={100} height={100}/>
+          return <Image key={index} className="w-8 mx-1" src={emoteMap[word]} alt={word} width={50} height={50}/>
         }else{
           return <>{word} </>
         }
