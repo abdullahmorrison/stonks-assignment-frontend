@@ -61,7 +61,7 @@ export default function useMessages() {
       unblockUser(userToUnblock)
       return
     }else if(message.startsWith('/mods ')){
-      setMessages((curMessages: Message[])=>[...curMessages, {type: "notification", message: "Mods are: mod1, mod2, mod2"}])
+      setMessages((curMessages: Message[])=>[...curMessages, {type: "notification", message: "Mods are: mod1, mod2, mod3"}])
       return
     }else if(message.startsWith('/vips ')){
       setMessages((curMessages: Message[])=>[...curMessages, {type: "notification", message: "VIPs are: vip1, vip2, vip3"}])
