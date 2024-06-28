@@ -27,6 +27,9 @@ export default function Message({message}: Message){
   const parseMessage = useCallback(()=>{
     return(
       words.map((word: any)=>{
+        //remove colon for emotes
+        if(word.charAt(0)==":") word = word.substring(1, word.length)
+
         if(emoteMap[word]){
           return <img className="w-8 mx-1" src={emoteMap[word]} alt={word}/>
         }else{
