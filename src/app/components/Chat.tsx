@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import useSuggestions from '@/hooks/useSuggestions'
 import useMessages from '@/hooks/useMessages'
 import emotes from "@/assets/emotes.json"
+import Message from './Message'
 
 export default function Chat(){
   const [currentUser] = useState("AbdullahMorrison")//login/useContext would determine current user
@@ -55,15 +56,7 @@ export default function Chat(){
         <div ref={chatContainerRef} className='overflow-auto'>
           {messages.map((message, index)=>{
             return(
-              <p key={index}className='py-1 text-[14px] hover:bg-gray-800'>
-                {message.type == "user" ?
-                  <>
-                  <span className='text-yellow-500 font-bold'>{message.username}</span> {message.message}
-                  </>
-                  :
-                  <span className='text-gray-300'>{message.message}</span>
-                }
-              </p>
+              <Message key={index} message={message}/>
             )
           })}
         </div>
