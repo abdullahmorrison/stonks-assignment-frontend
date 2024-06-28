@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import useSuggestions from '@/hooks/useSuggestions'
 import useMessages from '@/hooks/useMessages'
+import emotes from "@/assets/emotes.json"
 
 export default function Chat(){
   const [currentUser] = useState("AbdullahMorrison")//login/useContext would determine current user
@@ -10,6 +11,7 @@ export default function Chat(){
   const [suggestions, setSuggestions] = useState<string[] | undefined>()
   const [suggestUsers]  = useSuggestions(messages.filter(message=>message.type=="user").map((message)=>message.username))
   const [suggestCommands] = useSuggestions(["block [username]", "unblock [username]", "mods", "vips"])
+  const [suggestEmotes] = useSuggestions(emotes.map(emote=>Object.keys(emote)[0]))
 
   const getLastWord = useCallback((text: string) =>{
     const trimmedText = text.trim()
@@ -23,10 +25,12 @@ export default function Chat(){
       setSuggestions(suggestCommands(message))
     }else if(message.charAt(message.length-1)!=' ' && getLastWord(message)?.charAt(0)=='@'){
       setSuggestions(suggestUsers(getLastWord(message)))
+    }else if(message.charAt(message.length-1)!=' ' && getLastWord(message)?.charAt(0)==':'){
+      setSuggestions(suggestEmotes(getLastWord(message)))
     }else{
       setSuggestions(undefined)
     }
-  }, [ getLastWord, suggestCommands, suggestUsers])
+  }, [getLastWord, suggestCommands, suggestUsers])
 
   //Keeping chat scroll to bottom for every new message
   const chatContainerRef = useRef<HTMLDivElement | null>(null)
