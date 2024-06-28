@@ -1,6 +1,6 @@
 [
-  {"catJam": "./emotes/catJam.webp"},
-  {"EZ": "emotes/EZ.webp"},
-  {"KEKW": "emotes/KEKW.webp"},
-  {"monkaS": "emotes/monkaS.webp"}
+  {"catJam": "/emotes/catJam.webp"},
+  {"EZ": "/emotes/EZ.webp"},
+  {"KEKW": "/emotes/KEKW.webp"},
+  {"monkaS": "/emotes/monkaS.webp"}
 ]
