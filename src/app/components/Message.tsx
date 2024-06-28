@@ -42,7 +42,11 @@ export default function Message({message}: Message){
         <>
           <span className='text-yellow-500 font-bold'>{message.username}</span>: {parseMessage()}
         </>
-        : <span className='text-gray-300'>{parseMessage()}</span>
+      :message.type == "notification"?
+        <>
+         <span className='text-gray-300'>{parseMessage()}</span>
+        </>
+      : undefined
       }
     </p>
   )
